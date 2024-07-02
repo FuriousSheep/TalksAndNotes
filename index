@@ -6,3 +6,4 @@ To be written:
 * Making reliable distributed systems in the presence of software errors (Joe Armstrong's PHD thesis) [https://erlang.org/download/armstrong_thesis_2003.pdf]
 * Beating Floats at Their Own Game (John Gustafson) [https://www.youtube.com/watch?v=N05yYbUZMSQ]
 * Stanford Seminar: Beyond Floating Point: Next Generation Computer Arithmetic (John Gustafson) [https://www.youtube.com/watch?v=aP0Y1uAA-2Y]
+* Adventure with Types in Haskell - Lecture 1 (Simon Peyton Jones) [https://www.youtube.com/watch?v=6COvD8oynmI]
