@@ -1,0 +1,9 @@
+youtube link: https://www.youtube.com/watch?v=TTM_b7EJg5E
+
+Subject: How to build fault tolerant systems (systems with high availability that can have processes or hardware that fails without preventing the whole system from working)
+
+Takeaways: 
+  - only distributed systems can be fault-tolerant (a single computer can't recover from being hit with lightingz)
+  - errors are more likely than you think (bloody floats are non-associative because of rounding errors)
+  - "the essence of object-oriented-programming is message passing" (? worth a thought)
+  - fault-tolerance is basically explained in terms of "if something is wrong, log then reboot and hope for the best/let the higher node handle your problem"
