@@ -1,0 +1,46 @@
+ Ruby Conf 12 - Y Not- Adventures in Functional Programming by Jim Weirich  (https://www.youtube.com/watch?v=FITJMJjASUs)
+
+THE Y COMBINATOR
+
+this keynote: 
+non-technical -> HIGHLY TECHNICAL
+relevent -> EXTREMELY POINTLESS
+good -> WORST RUBY CODE EVER
+but FUN!
+
+"Effectively computable" (tbdefined)
+
+# fixpoints : f x = x
+# higher order functions : ex compose f g = \x -> f (g x)
+
+lambda calculus:
+# Tennent correspondence principle: 
+  constants == result of function that 
+# Introduction binding
+  can bind non-free variables and keep the same function
+ (\x -> \y -> f y) _ 2 => f 2 
+# Wrap function
+  can wrap function in another function and evaluate immediately to get the same
+  f x = g x 
+  (\x -> g x) 2 <=> g 2
+# Inline definition
+  can replace a function call by the function body with the values replaced (== beta reduction)
+# recursion
+
+## "partial function" "function improver"
+=> a function that applies a single step of a recursion
+foo = \f -> \n -> 
+        if n == 0 
+          then 1 
+          else n * f (n - 1)
+=> you can then defined functions that apply other steps using the function improver
+(\improver -> improver (improver)) (\improver -> \improver -> \n -> if n == 0 then 1 else n * improver (n - 1) ) 5 ~~~ not sure about the transcription
+
+improver / gen : a function that applied to itself does the recursion?
+
+higher order functions have fixed points
+factorial is the fixed point of the preceding improver (?)
+
+y = \f -> (\x -> x x ) (\x -> x x ))
+
+get to see "programming with nothing"
