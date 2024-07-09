@@ -2,6 +2,7 @@ Written summary:
 * The Do's and Don'ts of Error Handling • Joe Armstrong • GOTO 2018 [https://www.youtube.com/watch?v=TTM_b7EJg5E]
 * "Propositions as Types" by Philip Wadler [https://www.youtube.com/watch?v=IOiZatlZtGU]
 * A Daily Practice of Empirical Software Design - Kent Beck - DDD Europe 2023 [https://www.youtube.com/watch?v=yBEcq23OgB4]
+* Ruby Conf 12 - Y Not- Adventures in Functional Programming by Jim Weirich [ Ruby Conf 12 - Y Not- Adventures in Functional Programming by Jim Weirich ]
 
 
 To be written:
@@ -9,3 +10,4 @@ To be written:
 * Beating Floats at Their Own Game (John Gustafson) [https://www.youtube.com/watch?v=N05yYbUZMSQ]
 * Stanford Seminar: Beyond Floating Point: Next Generation Computer Arithmetic (John Gustafson) [https://www.youtube.com/watch?v=aP0Y1uAA-2Y]
 * Adventure with Types in Haskell - Lecture 1 (Simon Peyton Jones) [https://www.youtube.com/watch?v=6COvD8oynmI]
+* Programming with Nothing [https://tomstu.art/programming-with-nothing]
