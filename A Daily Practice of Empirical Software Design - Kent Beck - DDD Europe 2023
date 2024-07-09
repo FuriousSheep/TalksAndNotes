@@ -1,0 +1,63 @@
+ A Daily Practice of Empirical Software Design - Kent Beck - DDD Europe 2023 
+link: https://www.youtube.com/watch?v=yBEcq23OgB4
+
+notes in parentheses are my own comments on the talk
+
+"software engineering is an exercise in human relationships"
+=> the hard part of the job isn't technical but human 
+
+comments about his book "tidy first?": should you clean your code first?
+wrong answers: 
+- "always tidy first!" -> High priest of code
+- "never! people should suffer too!" -> why you so agro
+
+comments about "structured design" (see https://vtda.org/books/Computing/Programming/StructuredDesign_EdwardYourdonLarryConstantine.pdf)
+cost of software = cost of change
+cost of change = cost of big changes
+cost of big changes <- coupling
+
+code is coupled if changing one thing forces you to change another thing somewhere else
+
+=> cost of software ~ coupling + decoupling
+
+only important when you need to change code... (which is always!)
+so decouple good right? but can't decouple everything and have no coupling
+=> find balance ~ cost management of continued development
+
+coupled(e, e', delta) <=> delta e => delta e' & delta e' => delta e
+=> coupling depends on the kind of changes:
+- naming
+- typing
+- polymorphism
+- performance
+- ...
+
+hard to anticipate coupling
+
+if you can make atomic changes that affect all the code with no breaking, there's no coupling
+=> renaming in an ide that does it right removes coupling
+=> coupling depends also on tools
+
+coupling isn't homogenous: it can be everywhere, but it tends to pile up in some places and be missing in others
+
+cohesion = "span of coupling"
+e is cohesive if (e1..en) are coupled
+
+if coupling bad and cohesion good, why?
+=> compared to what? 
+cohesion = coupling with low cost (lumped in the same file/directory)
+
+devs: lumpers vs splitters (everything in the same files/everything split across directories)
+
+
+(for applying a hard change, make it easy (making it easy could be hard), and apply the change)
+
+changing direction:
+idea -> behaviour
+idea <- behaviour
+idea -> structure -> behaviour
+
+=> takeaway:
+/!\ separate the changes to the structure from the changes to the behaviour
+
+=> partitioning hard problems into multiple simple problems is an expert skill 
