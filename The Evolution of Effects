@@ -1,0 +1,24 @@
+[Haskell'23] The Evolution of Effects - Nicolas Wu
+
+=> a history of the evolution of effects handlers:
+- direct
+- monads & monad transformers
+- algebraic effects handlers
+- higher-order effects
+
+a bit too high-level for me but a good way to hear about effects handlers, the different version, expand general programming culture and hear good programming jokes
+
+Concept: * Denotational Semantics (the structure of the whole is the sum of the structures of the parts)
+ 
+Brent Yorgey blog post: Monads are Like Burritos
+
+efficient algebraic effects handlers
+=> fused-effects library haskell
+
+articles that may be interesting to read:
+a framework for higher(order effects & handlers
+fusion for free
+Effect handlers in scope
+...
+
+way to many cited for me to realistically read them all in the near future
