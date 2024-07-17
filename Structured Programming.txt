@@ -10,13 +10,15 @@ Normal text represents my general notes and understanding of a chapter.
 ("sometimes, there are quotes in parentheses to remind myself what some things mean")
 
 Notes by chapter/section:
-I) 
-1) 
+I) Notes on structured programming
+1) To my reader
 This was first written as personal notes and passed privately.
-2) 
+
+2) On our inability to do much
 We delude ourselves thinking that we can apply the same solutions to big and small programs and that scale is an irrelevant factor.
 => Size matters
-3)
+
+3) On the Reliability of Mechanism
 -> Checking a mechanism's correctness from only inputs and outputs is a fool's errand for big machin.
 -> You need to take the structure of the mechanism into account.
 -> A program is a mechanism and the same rules of checking for correctness apply: you need to check the program's structure.
@@ -29,6 +31,51 @@ We delude ourselves thinking that we can apply the same solutions to big and sma
 -> optimisation and manageability can be tradeoffs. Programs should be manageable.
 -> Program testing only shows the presence of bugs, never their absence.
 
-=> Testing by cases is anecdotal evidence. (what about property testing ?)
 
-4)
+=> If we care about program correctness, testing by cases is anecdotal evidence. 
+(what about property testing ?)
+
+4) On our Mental aids
+-> How do we convince ourself and others that we should care about program structure and how do we make good program structure?
+-> mental aids: enumeration, mathematical induction, abstraction.
+
+4.1) On enumeration
+-> "enumerative reasoning" when a property of compatutation is like a sequential enumerated set of statements
+-> a computation gives a enumerated number of outcomes ( x < r is either true or false, each branch of the if has that statement as an invariant)
+
+=> enumeration looks like match case with guards but those don't check the described invariants in the following branch
+
+4.2) on mathematical induction
+-> for loops/recursions
+-> a description of how while loops and recursion finishes on condition, 
+  that a code will loop k times >= 0  ==>  that it won't terminate on loop  0 <= n < k
+-> these proofs are too long to write and they're annoying!
+-> it shouldn't be the duty of the programmer to supply them!
+-> obvious is obvious because familiarity. obvious strucs may need name rather than be consciously appealed (to by structure ?) 
+-> no set of useful theorems to appeal to (? written in ~1970). Intuitive performance may be limiting yourself to known theorems/constructs, but some problems may need other theorems.
+-> the length of the proof is a sign that programming is actually complex and a warning against "clever constructions" than may be difficult to prove correct
+
+4.3) on abstraction
+-> abstraction is everywhere in programming which makes it hard to talk about as even variable assignment is one
+-> naming an operation (=code, a function) and using it is also an abstraction. 
+-> There is an analogy between applying functions and using theorems. You can ignore how they were defined/proved and only use their result.
+-> Abstraction is more powerful than enumeration as a mental aid
+-> "There is a parallel analogy between the unanalysed terms in which an axiom or theorem is 
+expressed and the unanalysed operands upon which a named operation is expected to act."
+
+5) An example of a correctness proof
+(imagine a proof of a program that takes two values, does some useless computations, and returns the first value `mod` the second )
+(followed by several similar proofs)
+
+6) On the validity of proofs vs the validity of implementations
+-> proofs only valid in the face of implementation: previous proofs suppose no upper bounds on integers, so how valid are these proofs?
+-> proofs in perfect world can fail in imperfect world. Correct proofs should assume the correct axioms (int32 < 2 147 483 647 for instance)
+-> be aware of assumptions when dealing with programs
+-> a good program should have as little assumptions as possible
+-> a good implementation should satisfy as many requirements as possible
+(this allows them to meet in the middle between software and hardware)
+-> example of failure when writing algol60 where x = y was true if x and y differed in the least significant digit to allow for leniency regarding rounding accuracy.
+-> with that definition of =, you could have a = b and b = c while a != c (how? if it's a single digit this rounding should work?)
+
+7) On understanding programs
+
