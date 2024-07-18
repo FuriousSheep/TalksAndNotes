@@ -1,5 +1,7 @@
 Structured Programming - Djikstra, Hoare
 
+context: 1972, low-level programming, lots of goto, no high-level language, 1968 article "goto statement considered harmful"
+
 Nomenclature:
 
 Normal text represents my general notes and understanding of a chapter.
@@ -8,6 +10,7 @@ Normal text represents my general notes and understanding of a chapter.
 (text in parentheses is my own reaction to something that is being read)
 "text in double quotes is, you guessed it, a quote"
 ("sometimes, there are quotes in parentheses to remind myself what some things mean")
+...Text following ellipses is the start of the first non-read paragraph
 
 Notes by chapter/section:
 I) Notes on structured programming
@@ -30,10 +33,10 @@ We delude ourselves thinking that we can apply the same solutions to big and sma
 -> "the art of programming is the art of organising complexity, of mastering multitude and avoiding its bastard chaos as effectively as possible"
 -> optimisation and manageability can be tradeoffs. Programs should be manageable.
 -> Program testing only shows the presence of bugs, never their absence.
-
-
-=> If we care about program correctness, testing by cases is anecdotal evidence. 
+-> If we care about program correctness, testing by cases is anecdotal evidence. 
 (what about property testing ?)
+
+=> This seems like it's more about imperative programming? The need to know about a program's structure at least.
 
 4) On our Mental aids
 -> How do we convince ourself and others that we should care about program structure and how do we make good program structure?
@@ -78,4 +81,52 @@ expressed and the unanalysed operands upon which a named operation is expected t
 -> with that definition of =, you could have a = b and b = c while a != c (how? if it's a single digit this rounding should work?)
 
 7) On understanding programs
+-> we teach programming languages as if they were a goal instead of a means
+-> programming is not the goal, the correct computations are
+-> saying a program is correct is saying that the computations described by the program are correct
+-> a program is static where the computation is dynamic (a program is a music sheet and the computation is music)
+-> Djikstra wants to shorten the gap between program and computation so that assertions about program are true about the computations 
+-> structure of program needs to reflect then structure of computation (? what about abstraction? what about code optimizations from the compiler?)
+-> Following section limited to programs written for sequential machines
+-> def:
+  - the purpose of a computation is to produce a desired effect
+  - since it happens through time the effect can be measured by looking at the difference between the state at t0 and at t1 when it ended
+  - if there are no intermediate states it's a primitive action
+-> when we have the intermediate effects it's a sequential computation.
+-> we have to convince ourselves that the composite action is the desired net effect of the primitive actions
+-> WE HAVE TO THANK HOARE FOR CASE OF'S! THANK YOU HOARE!
+-> an example through parsing : decomposition into a fixed number of subaction that can be enumerated 
+-> "if ... then" makes it seem like it is either a composite action or no action
+-> "if... then... else" and "case ... of" describes things as single actions (not primitive)
+-> this is represented by flowchats with single entries and single exits.
+-> same is true for "while ... do" and "do ... while"
+-> => 3 types of decomposition : concatenation, selection, repetition
+-> concatenation & selection can be understood by enumeration, repetition by induction
+-> proposal to limit ourselves when programming sequentially to these control structures
+-> goals of the proposal:
+  - make the mental effort to understand a program only proportional to the program length
+  - we can understand (sufficiently small) concatenation via enumerative reasoning, which then allows us to make assertions about each step.
+  - if a step is controlled by a selection the specific path is irrelevant wrt the primary level (the step still has a single exit)
+  - if a step is controlled by a repetition, the number of repetition is irrelevant wrt the primary level (same thing, on the condition that repetition happens the correct finite number of times)
+  - we can understand both the selection and repetition clauses thanks to enumerative and inductive reasoning
+-> remark: the validity of an assertion about a program's result can't be guaranteed during its execution
+```
+dd := dd / 2
+if dd <= r do r := r - dd
+```
+implies 
+`0 <= r < dd`
+but before the first step the following assertion can be true:
+`dd >= r`
+-> the validity of a relation is dependent on the progress of comutation, and this is typical for sequential processes
+-> having actions that are sequential (instead of simultaneous) may create some invalid states (reseting the number of printed lines after OR BEFORE changing pages leaves you either with printed lines and a state at 0, or a state with an arbitrary non-zero number of printed lines but no printed lines for the current pages)
+-> how do we characterise the progress of computation?
+-> => we try to find "a coordinate system where discrete points of computation progress can be identified, and this system has to be independent of the variables operated upon under program control"
+-> if the coordinates aren't independent, then we're assuming our program is already correct rather than checking if it is
+-> it would also make it possible to get into an infinite loop where the state doesn't change from one computation to the other, where if the coordinates are dependent (in the state) they haven't changed and the state cannot distinguish between the two points of progress.
+
+
+...We can state our problem in another way.
+
+
 
