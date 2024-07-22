@@ -5,12 +5,16 @@ context: 1972, low-level programming, lots of goto, no high-level language, 1968
 Nomenclature:
 
 Normal text represents my general notes and understanding of a chapter.
--> text prefixed with a simple arrow is a note on a specific paragraph
+I1i) text prefixed by a number in arabic or roman numerals followed by a closing parenthesis indicates a new chapter, with the name of the chapter following the parenthesis.
+-> text prefixed with a simple arrow is a note on a specific idea or paragraph
 => text prefixed with a double arrow is my interpretation of the chapter's conclusion
-(text in parentheses is my own reaction to something that is being read)
+(text in parentheses is my own reaction to something that is being read, sometimes a reminder, sometimes a comment)
 "text in double quotes is, you guessed it, a quote"
 ("sometimes, there are quotes in parentheses to remind myself what some things mean")
 ...Text following ellipses is the start of the first non-read paragraph
+###
+TEXT BETWEEN TWO LINES CONSISTING ONLY OF # SYMBOLS ARE IMPORTANT INFORMATION UP TO THE NEXT CHAPTER
+###
 
 Notes by chapter/section:
 I) Notes on structured programming
@@ -103,6 +107,9 @@ expressed and the unanalysed operands upon which a named operation is expected t
 -> => 3 types of decomposition : concatenation, selection, repetition
 -> concatenation & selection can be understood by enumeration, repetition by induction
 -> proposal to limit ourselves when programming sequentially to these control structures
+###
+THE FOLLOWING IS ONLY TRUE FOR SEQUENTIAL PROGRAMS
+###
 -> goals of the proposal:
   - make the mental effort to understand a program only proportional to the program length
   - we can understand (sufficiently small) concatenation via enumerative reasoning, which then allows us to make assertions about each step.
@@ -124,9 +131,19 @@ but before the first step the following assertion can be true:
 -> => we try to find "a coordinate system where discrete points of computation progress can be identified, and this system has to be independent of the variables operated upon under program control"
 -> if the coordinates aren't independent, then we're assuming our program is already correct rather than checking if it is
 -> it would also make it possible to get into an infinite loop where the state doesn't change from one computation to the other, where if the coordinates are dependent (in the state) they haven't changed and the state cannot distinguish between the two points of progress.
+-> how can one get the state of a composite computation just before a failure (without a complete memory dump) ?
+-> suppose the program text is linear and assume an identifying mechanism for program points/statement executions (using, for instance, semicolons) : the textual index
+-> while restricted to concatenation and selection, a single textual index is sufficient
+-> with repetition, it isn't anymore, but we could introduce a dynamic index (using a stack for instance)
+-> with procedures, a single textual index isn't sufficient; we need to know to which call of the procedure we refer
+-> need a stack of textual indices, instead of a single textual index; one per procedure call, reduced by one at procedure return
+-> independent, outside of the programmer's control (compiler-space)
+-> a similar coordinate system could work with gotos by counting the discrete points of computations but it would be unhelpful without a textual index
+-> CONCLUSION: by restricting ourselves to enumeration & induction on sequential programs, we can use and benefit a systematic error detection system, so we should
+-> progress through computation is then mapped on progress through text, making understanding programs easier
 
+8) ON COMPARING PROGRAMS
 
-...We can state our problem in another way.
-
+...It is a programmer's everyday experience
 
 
