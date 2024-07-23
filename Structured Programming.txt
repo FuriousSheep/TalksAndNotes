@@ -143,7 +143,127 @@ but before the first step the following assertion can be true:
 -> progress through computation is then mapped on progress through text, making understanding programs easier
 
 8) ON COMPARING PROGRAMS
+-> given any single problem, there is no unique program to solve it
+-> how can you saw two programs do the same thing? (given two programs p1 and p2 that solve a problem, p1 and p2 may invoque different computations)
+-> how can we structure these two programs to simplify comparing them?
+-> two programs that have the same effect ("solve the same problem") are only equivalent in that specific regard an in no other a priori
+-> it is only interesting to compare programs when you can pair computations in the order they are done and when the program text can equally be parsed into instructions corresponding to actions
+(<= dependent on having code and computation being close to equivalent)
+-> Strong condition
+-> ex1:
+```
+if B2 then
+begin while B1 do S1 end
+  else
+begin while B1 do S2 end
 
-...It is a programmer's everyday experience
+// vs
+while B1 do
+begin if B2 then S1 else S2 end
+```
+-> 1s is "if a then loop b else loop c"
+-> 2s is "loop (if a then b else c)"
+-> "(1) and (2) are "hard to compare" " => the choice is a relevant design decision to be considered
+
+ex2:
+```
+j:=0; equal:=true;
+while j != N do
+begin j:= j + 1; equal:=equal and (X[j] == Y[j]) end
+
+// vs
+
+j:=; equal:=true;
+while j != N and equal do
+begin j:= j + 1; equal(X[j] == Y[j]) end
+```
+-> (4) terminates as early as inequality is proven, contrary to (3) which checks the whole array anyway
+-> the programs are comparable as the last 2 lines are describing a single action, not divided in sub actions.
+-> properties: 
+for 0 <= j <= N
+for j = 0 => EQUALJ = true
+for 0 < j <= N => EQUALJ = EQUALJ-1 And (X[j]==Y[j])
+-> net effect: attaining equal = EQUALN by maintaining the relation equal = EQUALJ iteratively through j increasing
+
+-> we may be tempted to consider them both as refinments of a third program (7)
+```
+j: = O; equal:= EQUAL 0 ;
+while "perhaps still:equal != EQUALN" do
+beginj: = j +I; "equal:= EQUALJ' end
+```
+-> where "perhaps still: equal != EQUALN" stands for some sort of still open primitive
+-> (3) keeps the relation and can abbreviate equal:=EQUALJ as equal:= equal AND (X[j] == Y[j]) 
+-> (4) keeps the relation and can abbreviate equal:=EQUALJ as equal:= (X[j] == Y[j])
+-> => THIS MEANS (3) AND (4) ARENT A REFINEMENT OF (7) BECAUSE THERE IS NO UNIFIED WAY TO ABBREVIATE equal:=EQUALJ COMMON TO THEM BOTH TO REPLACE equal:=EQUALJ and there is no one-to-one correspondance
+(note: considering something like a dependent bool 
+```
+data DBool where
+  DTrue :: Nat n => DBool n
+  DFalse :: Nat n => DBool n
+
+dAnd :: Nat n => DBool n -> Bool -> DBool (n + 1)
+dAnd DTrue True = DTrue
+dAnd DFalse True = DFalse
+dAnd DTrue False = DFalse
+dAnd DFalse False = DFalse
+```
+you could write your `equal != EQUALN` by expecting a `DTrue (length X)`
+)
+
+-> THERE ARE "INCOMPARABLE" PROGRAMS
+-> comparing programs with one-to-one comparison of actions does not mean the actions should have the same net effect
+-> we can use this method to compare both alternative programs for the same job and different programs for similar jobs
+
+9)A FIRST EXAMPLE OF STEP-WISE PROGRAM COMPOSITION
+-> systematic sequencing => the structure of computations is reflected in our program
+-> example of construction of a well-structured program
+-> instruct a computer to print a table of the first thousand prime numbers, 2 being the first.
+-> example chosen because it is both complex enough to serve as model and simple enough that our attention is not usurped by the problem
+-> a well-structured program is not guaranteed to be "the best program"
+-> iterative approach by doing the least possible improving step 
+-> simplest program is "begin `print first thousand prime numbers` end " (we suppose the function exists)
+-> no such primitive
+```
+begin variable "table p";
+  "fill table p with first thousand prime numbers";
+  "print table p"
+end
+```
+-> no such primitive as "fill table p with first thousand prime numbers" so need to go deeper
+-> pause: realise about the process that:
+-> lots of assumptions: 
+  - "table p" is an available resource
+  - printing and computing primes are independent computations
+  - at least a thousand primes exist
+-> lots of decisions left:
+  - we may not know what prime numbers are at this point of the program
+  - we haven't decided on a printing layout
+-> strength of the approach that we can make these decisions independent from the problem and that they're left in the refinement of the constituant actions
+-> successful use of "divide and rule" (here: first decide what, then how ?)
+-> stop pause
+-> are the two computations independant? can they be written independently by two programmers?
+-> what's table p? what data structure are we using? how and when are we passing the data from action 1 to action 2
+-> two ways :
+-> 1) postpone this decision and refine the one or both actions, assuming a set of operations on the possible table p
+-> 2) decide first what's the type, then refinements of both actions can be done independently
+-> both are risky: 2) may make the subcomputations awkward by choosing poorly, and 1) may cause a great algorithm to be terrible to implement for a given data structure
+-> the algorithm and the data structure must be well-matched for a good program
+-> opinion: the efficient programmer tries to take the easiest decision first, whih requires the minimum amount of investigation for the maximum effect
+-> assume we chose the type of table p first: 2 options
+-> an Array Bool where true indicates the index is prime
+-> an Array Int with the sequential prime integers
+-> assume we chose 2) because it hopefully makes printing easier and keeps previous prime numbers which are useful to determine if a number is prime
+-> => table p = integer array p[1:1000] with p[k] the k-th prime number
+-> need to initialize table p in our program
+-> three, not two instructions
+-> first program = description 0; line "print first 1k prime numbers" is action 0a
+-> next program = description 1; contains a refinement of 0a expressed in 3 actions 1a 1b 1c
+```
+table p                     // 1a
+fill p with first 1k primes // 1b
+print table p               // 1c
+```
+...Now we have to describe our convention chosen
 
 
+  
