@@ -248,8 +248,8 @@ end
 -> 2) decide first what's the type, then refinements of both actions can be done independently
 -> both are risky: 2) may make the subcomputations awkward by choosing poorly, and 1) may cause a great algorithm to be terrible to implement for a given data structure
 -> the algorithm and the data structure must be well-matched for a good program
--> opinion: the efficient programmer tries to take the easiest decision first, whih requires the minimum amount of investigation for the maximum effect
--> assume we chose the type of table p first: 2 options
+-> opinion: the efficient programmer tries to take the easiest decision first, which requires the minimum amount of investigation for the maximum effect
+-> assume we chose the type of table p first and examine 2 options
 -> an Array Bool where true indicates the index is prime
 -> an Array Int with the sequential prime integers
 -> assume we chose 2) because it hopefully makes printing easier and keeps previous prime numbers which are useful to determine if a number is prime
@@ -263,7 +263,54 @@ table p                     // 1a
 fill p with first 1k primes // 1b
 print table p               // 1c
 ```
-...Now we have to describe our convention chosen
-
-
-  
+-> now we go further and describe our convention
+-> we call this description 2 =
+```
+1a = "integer array p[1:1000]"
+1b = "make for k from 1 through 1000 p[k] equal to the kth prime number"
+1c = "print p[k] for k from 1 through 1000"
+```
+-> description 2: "for 1a, 1b, 1c, we have chosen the refinements 2a, 2b, 2c"
+-> remark: 2c here is a computation that only depends on p's type. It doesn't need to be prime numbers. 
+-> follow-up: You shouldn't overlook this generalisation when designing an interface: the conception of the class of possible actions.
+-> if 2a is available and 2b and 2c work our problem is resolved
+-> suppose this is not the case and we need to conceive subcomputations for 2b and 2c. Thanks to the introduction of level 2, these can be designed independently.
+-> refine 2b into 2b1 (2b1 and not 3b to indicate the independance of the refinement):
+-> stupid but valid version where the programmer doesn't need the machine 2b1(1):
+```
+begin p[1]:=2; p[2]:=3;... end
+```
+-> next best 2b1(2)
+```
+begin integer k,j; k:=0; j:=1;
+  while k < 1000 do begin "increase j until next prime number";
+    k:=k+1; p[k]:=j end
+end
+```
+-> would work, need to refine "increase j until next prime number" == 2b1(2)a;
+```
+begin boolean jprime;
+  repeat j:=j+1;
+    "give to jprime the meaning: j is a prime number"
+  until jprime
+end
+```
+-> remark: repeat-until to indicate that j has to be increased at least once
+-> if programmer realises all primes except 2 are odd, he may refine again to improve efficiency
+-> 2b1(3)
+```
+begin integer k,j; p[1]:=2; k:=1; j:=1;
+  while k < 1000 do
+    begin "increase odd j until next odd prime number"
+  end
+end
+```
+-> with 2b1(3)a
+```
+begin boolean jprime;
+  repeat j:=j+2;
+    "give for odd j to jprime the meaning: j is a prime number";
+  until jprime
+end
+```
+... p35 (this seems more like a deep analysis of the process of building a program, not everything may need to be noted and remembered but the process is very interesting to follow)
