@@ -15,6 +15,7 @@ Concern for Correctness as a Guiding Principle for Program Composition.(Dijkstra
 Invariant based programming: basic approach and teaching experiences (Ralph-Johan Back, http://users.abo.fi/backrj/LogicAndReasoning/material/Invariant%20Based%20ProgrammingBasic%20appraoch.pdf)
 History of “Structured Programming” (https://vanemden.wordpress.com/2018/10/29/history-of-structured-programming/)
 The Expression Problem (Philip Wadler, 12 November 1998: https://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt)
+Programming with Arrows (John Hughes https://www.cse.chalmers.se/~rjmh/afp-arrows.pdf)
 TBD
 
 
