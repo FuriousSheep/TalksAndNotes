@@ -1,0 +1,9 @@
+Category Theory for the Working Hacker by Philip Wadler (https://www.youtube.com/watch?v=V10hzjgoklA)
+
+Propositions as types
+
+If you want to change the world (and you should) you should find great people to work on great ideas and ignore the fact that nobody will care for 30 years
+
+invented vs discovered programming language (lambda = discovered)
+
+THE THIRD HALF: category theory
