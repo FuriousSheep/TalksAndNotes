@@ -314,3 +314,5 @@ begin boolean jprime;
 end
 ```
 ... p35 (this seems more like a deep analysis of the process of building a program, not everything may need to be noted and remembered but the process is very interesting to follow)
+
+actually now p35 but couldn't take notes in the meantime
